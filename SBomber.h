@@ -20,7 +20,6 @@ public:
     void ProcessKBHit();
     void TimeStart();
     void TimeFinish();
-
     void DrawFrame();
     void MoveObjects();
     void CheckObjects();
@@ -41,6 +40,7 @@ private:
     std::vector<Bomb*> FindAllBombs() const;
 
     void DropBomb();
+    void DropBombcl();
 
     std::vector<DynamicObject*> vecDynamicObj;
     std::vector<GameObject*> vecStaticObj;

@@ -13,3 +13,7 @@ void Bomb::Draw() const
     GotoXY(x, y);
     cout << "*";
 }
+
+Bomb* Bomb::clone() const{
+    return new Bomb(*this);
+}
