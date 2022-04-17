@@ -17,7 +17,6 @@ public:
     inline void SetFinishX(uint16_t finishXN) { finishX = finishXN; }
 
     void Draw() const override;
-
 private:
 
     uint16_t height;

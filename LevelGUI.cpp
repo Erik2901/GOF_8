@@ -49,3 +49,4 @@ void __fastcall LevelGUI::SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint
     bombsNumber = bombsNumberNew;
     score = scoreNew;
 }
+

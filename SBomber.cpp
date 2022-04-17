@@ -8,6 +8,7 @@
 #include "Ground.h"
 #include "Tank.h"
 #include "House.h"
+#include "Tree.h"
 
 using namespace std;
 using namespace MyTools;
@@ -62,6 +63,13 @@ SBomber::SBomber()
     pHouse->SetWidth(13);
     pHouse->SetPos(80, groundY - 1);
     vecStaticObj.push_back(pHouse);
+
+    Tree* pTree = new (nothrow) Tree(new SmallTree());
+    if (pTree != nullptr)
+    {
+        pTree->SetPos(10, groundY - 1);
+        vecDynamicObj.push_back(pTree);
+    }
 
     /*
     Bomb* pBomb = new Bomb;
@@ -299,6 +307,13 @@ void SBomber::ProcessKBHit()
         DropBomb();
         break;
 
+    case 'D':
+        DropBombcl();
+        break;
+    case 'd':
+        DropBombcl();
+        break;
+
     default:
         break;
     }
@@ -362,6 +377,30 @@ void SBomber::DropBomb()
         pBomb->SetWidth(SMALL_CRATER_SIZE);
 
         vecDynamicObj.push_back(pBomb);
+        bombsNumber--;
+        score -= Bomb::BombCost;
+    }
+}
+
+void SBomber::DropBombcl()
+{
+    if (bombsNumber > 0)
+    {
+        WriteToLog(string(__FUNCTION__) + " was invoked");
+
+        Plane* pPlane = FindPlane();
+        double x = pPlane->GetX() + 4;
+        double y = pPlane->GetY() + 2;
+
+        Bomb* pBomb = new Bomb;
+        pBomb->SetDirection(0.3, 1);
+        pBomb->SetSpeed(2);
+        pBomb->SetPos(x, y);
+        pBomb->SetWidth(SMALL_CRATER_SIZE);
+        Bomb* pBomb2 = pBomb->clone();
+        pBomb2->SetPos(x+2, y);
+        vecDynamicObj.push_back(pBomb);
+        vecDynamicObj.push_back(pBomb2);
         bombsNumber--;
         score -= Bomb::BombCost;
     }
